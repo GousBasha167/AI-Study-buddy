@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Dashboard · Learn Mate AI</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <script>try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") === "light" ? "light" : "dark"); } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }</script>
+</head>
+<body>
+  <main id="main" class="content">
+    <div class="page-head">
+      <div>
+        <p class="eyebrow" id="greeting-time">Welcome back</p>
+        <h1 class="page-title">Welcome back<span id="welcome-name"></span> 👋</h1>
+        <p class="page-sub">Here's an overview of your study space.</p>
+      </div>
+    </div>
+
+    <div id="msg" class="msg hidden" role="alert"></div>
+
+    <section class="stat-grid" aria-label="Statistics">
+      <article class="stat-card">
+        <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg></span>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-materials">–</div>
+          <div class="stat-label">Your Materials</div>
+        </div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon alt" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z"/><path d="M19 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1z"/></svg></span>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-summarized">–</div>
+          <div class="stat-label">Summarized</div>
+        </div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-quizzes">–</div>
+          <div class="stat-label">Quizzes Generated</div>
+        </div>
+      </article>
+    </section>
+    <div class="dash-grid">
+      <div class="dash-col">
+        <section class="card" aria-labelledby="continue-h">
+          <div class="card-head">
+            <div class="head-left">
+              <h2 id="continue-h">Continue Learning</h2>
+              <span class="badge badge-accent">Latest</span>
+            </div>
+          </div>
+          <div id="continue-learning">
+            <div class="sk-row"><div class="sk sk-avatar"></div><div class="sk-body"><div class="sk sk-line w60"></div><div class="sk sk-line w40"></div></div></div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="recent-h">
+          <div class="card-head">
+            <h2 id="recent-h">Recent Materials</h2>
+            <a class="link-more" href="materials.html">View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+          </div>
+          <div id="recent-list" class="recent-list">
+            <div class="sk-row"><div class="sk sk-avatar"></div><div class="sk-body"><div class="sk sk-line w60"></div><div class="sk sk-line w40"></div></div></div>
+            <div class="sk-row"><div class="sk sk-avatar"></div><div class="sk-body"><div class="sk sk-line w80"></div><div class="sk sk-line w40"></div></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="dash-col">
+        <section class="card" aria-labelledby="progress-h">
+          <div class="card-head"><h2 id="progress-h">Learning Progress</h2></div>
+          <div id="progress-panel">
+            <div class="sk sk-line w80" style="margin-bottom:12px"></div>
+            <div class="sk sk-line w60"></div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="qa-h">
+          <div class="card-head"><h2 id="qa-h">Quick Actions</h2></div>
+          <div class="quick-actions">
+            <a class="quick-action" href="materials.html#upload">
+              <span class="qa-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M20 16v2a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-2"/></svg></span>
+              <span><strong>Upload material</strong><small>Add a .txt, .md or .pdf file</small></span>
+            </a>
+            <a class="quick-action" href="materials.html">
+              <span class="qa-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg></span>
+              <span><strong>Browse library</strong><small>Search and open your materials</small></span>
+            </a>
+            <a class="quick-action hidden" href="admin.html" id="qa-admin">
+              <span class="qa-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+              <span><strong>Admin panel</strong><small>Manage users and statistics</small></span>
+            </a>
+          </div>
+        </section>
+
+        <section class="card ai-card" aria-labelledby="ai-h">
+          <div class="ai-orb" aria-hidden="true"></div>
+          <div class="card-head">
+            <div class="head-left">
+              <span class="ai-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z"/><path d="M19 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1z"/></svg></span>
+              <div>
+                <h2 id="ai-h">AI Study Toolkit</h2>
+                <p class="muted">Powered by Gemini</p>
+              </div>
+            </div>
+          </div>
+          <ul class="ai-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg>Concise bullet-point summaries</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg>Flashcards you can flip &amp; review</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg>Multiple-choice quizzes with instant feedback</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg>Personalized day-by-day study plans</li>
+          </ul>
+          <a class="btn btn-block" href="materials.html">Open a material to generate
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
+

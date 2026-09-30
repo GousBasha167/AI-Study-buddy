@@ -1,31 +1,140 @@
-# AI-Study-buddy
-AI StudyBuddy is an AI-powered study management web application designed to help students learn in a more organized, interactive, and personalized way. It allows students to upload and manage study materials and use AI-based features such as AI Summaries, Flashcards, Practice Quizzes, and Personalized Study Plans. 
-The project combines a simple student-friendly interface with AI-powered learning tools to make revision and study planning easier.
+# AI StudyBuddy
 
-‚ú® Key Features
+An AI-powered educational application built with **Node.js, Express, MongoDB, and Gemini AI** with an interactive web frontend.
 
-üìö Study Material Management ‚Äì Upload and organize learning materials.
+## Features
+- JWT authentication stored in **HTTP-only cookies** (access + refresh tokens)
+- Role-Based Access Control (student / admin)
+- Upload study materials (`.txt`, `.md`, `.pdf`)
+- AI-powered: summarize, flashcards, quiz, and personalized study plans via Google Gemini
+- Interactive frontend dashboard for students and admins
 
-üìù AI Summary ‚Äì Generate simple summaries from study materials.
+---
 
-üÉè AI Flashcards ‚Äì Create flashcards automatically for quick revision.
+## Project Structure
 
-üß† AI Quiz ‚Äì Generate practice questions and test understanding.
+```
+AI-StudyBuddy/
++-- backend/                         # Backend Express API
+¶   +-- src/
+¶   ¶   +-- controllers/             # authController, materialController, adminController
+¶   ¶   +-- middleware/              # auth, upload (multer)
+¶   ¶   +-- models/                  # User, Material (Mongoose schemas)
+¶   ¶   +-- routes/                  # auth, materials, admin
+¶   ¶   +-- utils/                   # db, gemini, tokens
+¶   +-- uploads/                     # File upload storage (auto-created)
+¶   +-- .env                         # Local environment variables (DO NOT COMMIT)
+¶   +-- .env.example                 # Example template for backend env
+¶   +-- index.js                     # Express backend entry point
+¶   +-- package.json                 # Backend dependencies & scripts
++-- frontend/                        # Static HTML/CSS/JS frontend
+¶   +-- css/                         # Stylesheets
+¶   +-- js/                          # Client-side scripts (API connectors)
+¶   +-- admin.html                   # Admin portal
+¶   +-- dashboard.html               # Student dashboard
+¶   +-- index.html                   # Login page
+¶   +-- material.html                # Material detail & AI tools
+¶   +-- materials.html               # Materials list & upload
+¶   +-- register.html                # Registration page
+¶   +-- server.js                    # Local static server (port 3000)
+¶   +-- package.json                 # Frontend scripts
++-- .gitignore                       # Prevents committing node_modules, .env, uploads
++-- package.json                     # Root orchestrator scripts
++-- README.md                        # Documentation
+```
 
-üìÖ Personalized Study Plan ‚Äì Create study schedules based on learning goals and available time.
+---
 
-üîê User Authentication ‚Äì Secure registration and login system.
+## Getting Started
 
-üë§ Multiple Users ‚Äì Separate study data for individual users.
+### 1. Clone the repository
+```bash
+git clone <your-repo-url>
+cd AI-StudyBuddy
+```
 
-üõ†Ô∏è Admin Management ‚Äì Admin features for managing users and system information.
+### 2. Install dependencies
+Install dependencies for both backend and frontend:
+```bash
+npm run install:all
+```
+*(Or install them individually by running `cd backend && npm install` and `cd ../frontend && npm install`)*
 
-üéØ Project Goal
+### 3. Configure Environment Variables
+Copy `.env.example` in the `backend/` folder to `backend/.env`:
+```bash
+cp backend/.env.example backend/.env
+```
+Update `backend/.env` with your actual credentials:
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_ACCESS_SECRET=your_jwt_access_secret
+JWT_REFRESH_SECRET=your_jwt_refresh_secret
+GEMINI_API_KEY=your_gemini_api_key
+NODE_ENV=development
+CLIENT_URL=http://localhost:3000
+```
 
-The goal of AI StudyBuddy is to bring study materials, revision tools, AI assistance, and study planning into one platform, helping students spend less time organizing their studies and more time actually learning.
+### 4. Run the Application
 
-üí° Why AI StudyBuddy?
+You can run the servers using the root convenience commands:
 
-Instead of using separate tools for summarizing notes, creating flashcards, practicing quizzes, and planning study schedules, students can access these features from a single application.
+- **Start Backend** (API on `http://localhost:5000`):
+  ```bash
+  npm run backend
+  ```
+  *(or `npm start`)*
 
-Learn smarter. Revise faster. Study better.
+- **Start Frontend** (Web UI on `http://localhost:3000`):
+  ```bash
+  npm run frontend
+  ```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to access AI StudyBuddy.
+
+---
+
+## API Reference
+
+### Auth Routes ó `/api/auth`
+
+| Method | Endpoint    | Body                          | Description          |
+|--------|-------------|-------------------------------|----------------------|
+| POST   | /register   | `name, email, password, role` | Register new user    |
+| POST   | /login      | `email, password`             | Login                |
+| POST   | /refresh    | ó                             | Refresh tokens       |
+| POST   | /logout     | ó                             | Clear cookies        |
+
+> Tokens are stored in **HTTP-only cookies** (`accessToken` expires in 15m, `refreshToken` in 7d).
+
+---
+
+### Material Routes ó `/api/materials` *(requires login)*
+
+| Method | Endpoint              | Body / Notes                         | Description             |
+|--------|-----------------------|--------------------------------------|-------------------------|
+| POST   | /upload               | Form-data: `file` + optional `title` | Upload study material   |
+| GET    | /                     | ó                                    | List your materials     |
+| GET    | /:id                  | ó                                    | Get one material        |
+| DELETE | /:id                  | ó                                    | Delete material         |
+| POST   | /:id/summarize        | ó                                    | AI summarize            |
+| POST   | /:id/flashcards       | `{ count: 5 }`                       | Generate flashcards     |
+| POST   | /:id/quiz             | `{ count: 5 }`                       | Generate MCQ quiz       |
+| POST   | /:id/study-plan       | `{ goal, hoursPerDay, days }`        | Personalized study plan |
+
+---
+
+### Admin Routes ó `/api/admin` *(admin role only)*
+
+| Method | Endpoint      | Description                   |
+|--------|---------------|-------------------------------|
+| GET    | /users        | List all users                |
+| DELETE | /users/:id    | Delete user + their materials |
+| GET    | /stats        | Total users & materials count |
+
+---
+
+## Security Notes
+- Never commit `.env` or sensitive API keys to Git. The `.gitignore` file is pre-configured to ignore all `.env` files.
+- The `node_modules` folders are also ignored to ensure your repository stays lightweight and pushes quickly without hitting GitHub file size limits.

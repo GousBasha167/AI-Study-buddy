@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Admin · Learn Mate AI</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <script>try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") === "light" ? "light" : "dark"); } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }</script>
+</head>
+<body>
+  <main id="main" class="content">
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Control center</p>
+        <h1 class="page-title">Admin Dashboard</h1>
+        <p class="page-sub">Monitor users and study activity across the platform.</p>
+      </div>
+    </div>
+
+    <div id="msg" class="msg hidden" role="alert"></div>
+
+    <section class="stat-grid" aria-label="Statistics">
+      <article class="stat-card">
+        <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-users">–</div>
+          <div class="stat-label">Total Students</div>
+        </div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon alt" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg></span>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-materials">–</div>
+          <div class="stat-label">Total Materials</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="card" aria-labelledby="users-h">
+      <div class="card-head">
+        <h2 id="users-h">Users</h2>
+        <span class="table-caption" id="users-count"></span>
+      </div>
+      <div id="users-list">
+        <div class="sk-row"><div class="sk sk-avatar" style="border-radius:50%"></div><div class="sk-body"><div class="sk sk-cell w60 sk-line"></div><div class="sk sk-cell w40 sk-line"></div></div></div>
+        <div class="sk-row"><div class="sk sk-avatar" style="border-radius:50%"></div><div class="sk-body"><div class="sk sk-cell w80 sk-line"></div><div class="sk sk-cell w40 sk-line"></div></div></div>
+        <div class="sk-row"><div class="sk sk-avatar" style="border-radius:50%"></div><div class="sk-body"><div class="sk sk-cell w60 sk-line"></div><div class="sk sk-cell w40 sk-line"></div></div></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

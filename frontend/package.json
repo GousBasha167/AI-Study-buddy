@@ -1,0 +1,12 @@
+{
+  "name": "ai-studybuddy-frontend",
+  "version": "1.0.0",
+  "description": "Static frontend for AI StudyBuddy (plain HTML/CSS/JS)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "ai-studybuddy": "file:.."
+  }
+}
